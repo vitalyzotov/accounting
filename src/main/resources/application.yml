@@ -1,0 +1,62 @@
+spring:
+  jpa:
+    generate-ddl: false
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    open-in-view: false
+  datasource:
+    url: jdbc:mysql://accounting-db:3306/accounting?useUnicode=true&characterEncoding=utf8
+    username: accounting
+    password: accounting
+    driver-class-name: com.mysql.jdbc.Driver
+
+liquibase:
+  enabled: false
+
+security:
+  basic:
+    enabled: false
+
+server:
+  context-path: /
+
+nalogru:
+  address: https://proverkacheka.nalog.ru:9999
+
+nalogru2:
+  address: https://irkkt-mobile.nalog.ru:8888
+
+cashreceipts:
+  liquibase:
+    enabled: true
+    change-log: classpath:db/cashreceipt/changelog/db.changelog-master.xml
+
+accounting:
+  hold-duration: 45
+  liquibase:
+    enabled: true
+    change-log: classpath:db/accounting/changelog/db.changelog-master.xml
+
+application:
+  liquibase:
+    enabled: true
+    change-log: classpath:db/application/changelog/db.changelog-master.xml
+
+
+alfabank:
+  reports:
+    path: "/alfabank_reports"
+
+tinkoff:
+  reports:
+    path: "/tinkoff_reports"
+
+gazprombank:
+  reports:
+    path: "/gpb_reports"
+    skip:
+      - "3852360"
+      - "1234567"

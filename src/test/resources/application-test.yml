@@ -1,0 +1,52 @@
+spring:
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
+    username: sa
+    password: sa
+    platform: h2
+    initialize: false
+
+liquibase:
+  enabled: false
+
+debug: true
+
+nalogru:
+  username: user
+  password: password
+
+nalogru2:
+  address: https://localhost:8888
+  username: user
+  password: password
+  deviceId: deviceid
+  clientSecret: secret
+
+alfabank:
+  reports:
+    path: alfabank_reports
+tinkoff:
+  reports:
+    path: tinkoff_reports
+gazprombank:
+  reports:
+    path: gpb_reports
+    skip:
+      - "3852360"
+      - "123456"
+
+accounting:
+  liquibase:
+    change-log: classpath*:db.accounting-tests.xml
+    enabled: true
+
+logging:
+  level:
+    ru.vzotov.cashreceipt: DEBUG
+    ru.vzotov.accounting: DEBUG

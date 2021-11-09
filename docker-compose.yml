@@ -1,0 +1,44 @@
+version: '3.7'
+services:
+  accounting-application:
+    image: vzotov/accounting-application:1.106-SNAPSHOT
+    ports:
+      - 8080:8080
+      - 5005:5005
+    depends_on:
+      - accounting-database
+    networks:
+      accounting-network:
+        aliases:
+          - accounting-application
+    environment:
+      - JAVA_OPTS=-Djava.net.preferIPv4Stack=true -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+      - SPRING_DATASOURCE_URL=jdbc:mysql://accounting-database/accounting?useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=accounting
+      - SPRING_DATASOURCE_PASSWORD=accounting
+      - NALOGRU_USERNAME=123456
+      - NALOGRU_PASSWORD=654321
+      - NALOGRU2_DEVICEID=7C82010F-16CC-446B-8F66-FC4080C66521
+      - NALOGRU2_CLIENTSECRET=IyvrAbKt9h/8p6a7QPh8gpkXYQ4=
+      - NALOGRU2_USERNAME=123456
+      - NALOGRU2_PASSWORD=654321
+    volumes:
+      - ./alfabank_reports:/alfabank_reports
+  accounting-database:
+    image: mysql:5.7
+    command: --lower-case-table-names=1
+    ports:
+      - 3306:3306
+    networks:
+      accounting-network:
+        aliases:
+          - accounting-database
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=accounting
+      - MYSQL_PASSWORD=accounting
+      - MYSQL_DATABASE=accounting
+    volumes:
+      - ./mysql:/var/lib/mysql
+networks:
+  accounting-network:

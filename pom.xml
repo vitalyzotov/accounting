@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ru.vzotov</groupId>
+    <artifactId>accounting</artifactId>
+    <version>1.106-SNAPSHOT</version>
+    <name>Application: accounting</name>
+
+    <properties>
+        <docker.host>tcp://127.0.0.1:2375</docker.host>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <spring.boot.version>1.5.8.RELEASE</spring.boot.version>
+        <spring.version>4.3.12.RELEASE</spring.version>
+        <java.version>1.8</java.version>
+        <jackson.version>2.8.10</jackson.version>
+        <commons-lang.version>2.6</commons-lang.version>
+        <junit.version>4.13</junit.version>
+        <assertj.verstion>2.7.0</assertj.verstion>
+        <logback.version>1.1.11</logback.version>
+        <slf4j.version>1.7.25</slf4j.version>
+        <jacoco.version>0.8.3</jacoco.version>
+        <mockito.version>1.10.19</mockito.version>
+        <bouncycastle.version>1.69</bouncycastle.version>
+
+        <!-- -->
+        <nalogru.username>user</nalogru.username>
+        <nalogru.password>password</nalogru.password>
+
+        <!-- Own modules -->
+        <ddd.version>1.1</ddd.version>
+        <gov.model.version>1.3</gov.model.version>
+        <cashreceipt.model.version>1.51</cashreceipt.model.version>
+        <cashreceipt.module.version>1.36</cashreceipt.module.version>
+        <accounting.module.version>1.51</accounting.module.version>
+        <alfabank.module.version>1.14</alfabank.module.version>
+        <tinkoff.module.version>1.12</tinkoff.module.version>
+        <gpb.module.version>1.8</gpb.module.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Own modules -->
+            <dependency>
+                <groupId>ru.vzotov</groupId>
+                <artifactId>cashreceipt-module</artifactId>
+                <version>${cashreceipt.module.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ru.vzotov</groupId>
+                <artifactId>accounting-module</artifactId>
+                <version>${accounting.module.version}</version>
+            </dependency>
+
+            <!--<dependency>
+                <groupId>ru.vzotov</groupId>
+                <artifactId>alfabank-module</artifactId>
+                <version>${alfabank.module.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ru.vzotov</groupId>
+                <artifactId>tinkoff-module</artifactId>
+                <version>${tinkoff.module.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ru.vzotov</groupId>
+                <artifactId>gpb-module</artifactId>
+                <version>${gpb.module.version}</version>
+            </dependency>-->
+
+            <dependency>
+                <groupId>ru.vzotov</groupId>
+                <artifactId>cashreceipt-model</artifactId>
+                <version>${cashreceipt.model.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ru.vzotov</groupId>
+                <artifactId>gov-model</artifactId>
+                <version>${gov.model.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ru.vzotov</groupId>
+                <artifactId>ddd-shared</artifactId>
+                <version>${ddd.version}</version>
+            </dependency>
+
+            <!-- External libraries -->
+            <dependency>
+                <!-- Import dependency management from Spring Boot -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.verstion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons-lang.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+
+            <!-- Security -->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk15on</artifactId>
+                <version>${bouncycastle.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!--
+        Internal dependencies
+        -->
+        <dependency>
+            <groupId>ru.vzotov</groupId>
+            <artifactId>cashreceipt-module</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>ru.vzotov</groupId>
+            <artifactId>accounting-module</artifactId>
+        </dependency>
+
+        <!--
+        <dependency>
+            <groupId>ru.vzotov</groupId>
+            <artifactId>alfabank-module</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>ru.vzotov</groupId>
+            <artifactId>tinkoff-module</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>ru.vzotov</groupId>
+            <artifactId>gpb-module</artifactId>
+        </dependency>
+        -->
+
+        <!--
+        Testing
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>4.2.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--
+        Utilities
+        -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+        </dependency>
+
+        <!--
+        Spring
+        -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Security -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+        </dependency>
+
+        <!--
+        Database driver
+        -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!--
+        JSON support
+        -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
+
+        <!--
+        REST
+        -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+
+        <!--
+        Logging
+        -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>docker</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.spotify</groupId>
+                        <artifactId>dockerfile-maven-plugin</artifactId>
+                        <version>1.4.9</version>
+                        <executions>
+                            <execution>
+                                <id>build</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                                <configuration>
+                                    <repository>vzotov/accounting-application</repository>
+                                    <tag>${project.version}</tag>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+                <configuration>
+                    <executable>false</executable>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>${project.artifactId}</artifactId>
+                                    <version>${project.version}</version>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Code Coverage report generation -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>generate-code-coverage-report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Git flow support -->
+            <plugin>
+                <groupId>com.amashchenko.maven.plugin</groupId>
+                <artifactId>gitflow-maven-plugin</artifactId>
+                <version>1.13.0</version>
+                <configuration>
+                    <gitFlowConfig>
+                        <productionBranch>main</productionBranch>
+                        <developmentBranch>main</developmentBranch>
+                    </gitFlowConfig>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>github-vzotov</id>
+            <name>GitHub vitalyzotov Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/vitalyzotov/maven</url>
+        </repository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>github-vzotov</id>
+            <name>GitHub vitalyzotov Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/vitalyzotov/maven</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+</project>
