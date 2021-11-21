@@ -1,5 +1,6 @@
 package ru.vzotov.accounting.interfaces.accounting.rest;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,11 +29,19 @@ public class SignupController {
 }
 
 class UserRegistrationRequest {
+    @Schema(description = "Name of the user")
     private String name;
+
+    @Schema(description = "Password of the user as plaintext")
     private String password;
 
+    @Schema(description = "First name")
     private String firstName;
+
+    @Schema(description = "Last name")
     private String lastName;
+
+    @Schema(description = "Display name")
     private String displayName;
 
     public String getName() {
@@ -77,6 +86,7 @@ class UserRegistrationRequest {
 }
 
 class UserRegistrationResponse {
+    @Schema(description = "Name of the registered user")
     private String name;
 
     public UserRegistrationResponse(String name) {

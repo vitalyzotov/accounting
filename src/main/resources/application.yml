@@ -12,16 +12,12 @@ spring:
     username: accounting
     password: accounting
     driver-class-name: com.mysql.jdbc.Driver
-
-liquibase:
-  enabled: false
-
-security:
-  basic:
+  liquibase:
     enabled: false
 
 server:
-  context-path: /
+  servlet:
+    context-path: /
 
 nalogru:
   address: https://proverkacheka.nalog.ru:9999
@@ -35,12 +31,12 @@ cashreceipts:
     change-log: classpath:db/cashreceipt/changelog/db.changelog-master.xml
 
 accounting:
-  hold-duration: 45
   liquibase:
     enabled: true
     change-log: classpath:db/accounting/changelog/db.changelog-master.xml
 
 application:
+  version: ^project.version^
   liquibase:
     enabled: true
     change-log: classpath:db/application/changelog/db.changelog-master.xml
@@ -60,3 +56,10 @@ gazprombank:
     skip:
       - "3852360"
       - "1234567"
+
+debug: true
+
+logging:
+  level:
+    ru.vzotov.cashreceipt: DEBUG
+    ru.vzotov.accounting: DEBUG

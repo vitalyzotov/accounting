@@ -24,6 +24,21 @@
       "name": "alfabank.reports.path",
       "type": "java.lang.String",
       "description": "Description for alfabank.reports.path."
+    },
+    {
+      "name": "application.version",
+      "type": "java.lang.String",
+      "description": "Description for application.version."
+    },
+    {
+      "name": "gazprombank.reports.path",
+      "type": "java.lang.String",
+      "description": "Description for gazprombank.reports.path."
+    },
+    {
+      "name": "gazprombank.reports.skip",
+      "type": "java.lang.String",
+      "description": "Description for gazprombank.reports.skip."
     }
   ]
 }

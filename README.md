@@ -13,3 +13,6 @@ Cleanup
     docker rm -f $(docker ps -a -q)
     docker volume rm $(docker volume ls -q)
 
+## Swagger UI
+
+http://localhost:8080/swagger-ui.html
