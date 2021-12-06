@@ -39,12 +39,12 @@
         <!-- Own modules -->
         <ddd.version>1.1</ddd.version>
         <gov.model.version>1.3</gov.model.version>
-        <cashreceipt.model.version>1.51</cashreceipt.model.version>
+<!--        <cashreceipt.model.version>1.51</cashreceipt.model.version>-->
 
-        <cashreceipt.module.version>1.38</cashreceipt.module.version>
-        <accounting.module.version>1.53</accounting.module.version>
+        <cashreceipt.module.version>1.39-SNAPSHOT</cashreceipt.module.version>
+        <accounting.module.version>1.54-SNAPSHOT</accounting.module.version>
 
-        <alfabank.module.version>1.14</alfabank.module.version>
+        <alfabank.module.version>1.15-SNAPSHOT</alfabank.module.version>
         <tinkoff.module.version>1.12</tinkoff.module.version>
         <gpb.module.version>1.8</gpb.module.version>
     </properties>
@@ -64,13 +64,13 @@
                 <version>${accounting.module.version}</version>
             </dependency>
 
-            <!--<dependency>
+            <dependency>
                 <groupId>ru.vzotov</groupId>
                 <artifactId>alfabank-module</artifactId>
                 <version>${alfabank.module.version}</version>
             </dependency>
 
-            <dependency>
+            <!--<dependency>
                 <groupId>ru.vzotov</groupId>
                 <artifactId>tinkoff-module</artifactId>
                 <version>${tinkoff.module.version}</version>
@@ -82,11 +82,11 @@
                 <version>${gpb.module.version}</version>
             </dependency>-->
 
-            <dependency>
-                <groupId>ru.vzotov</groupId>
-                <artifactId>cashreceipt-model</artifactId>
-                <version>${cashreceipt.model.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>ru.vzotov</groupId>-->
+<!--                <artifactId>cashreceipt-model</artifactId>-->
+<!--                <version>${cashreceipt.model.version}</version>-->
+<!--            </dependency>-->
 
             <dependency>
                 <groupId>ru.vzotov</groupId>
@@ -188,12 +188,12 @@
             <artifactId>accounting-module</artifactId>
         </dependency>
 
-        <!--
         <dependency>
             <groupId>ru.vzotov</groupId>
             <artifactId>alfabank-module</artifactId>
         </dependency>
 
+        <!--
         <dependency>
             <groupId>ru.vzotov</groupId>
             <artifactId>tinkoff-module</artifactId>

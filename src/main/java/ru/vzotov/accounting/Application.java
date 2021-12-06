@@ -9,6 +9,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.jdbc.support.DatabaseStartupValidator;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.WebApplicationInitializer;
 
 import javax.persistence.EntityManagerFactory;
@@ -19,11 +20,12 @@ import java.util.stream.Stream;
         scanBasePackages = {
                 "ru.vzotov.cashreceipt",
                 "ru.vzotov.accounting",
-//                "ru.vzotov.alfabank",
+                "ru.vzotov.alfabank",
 //                "ru.vzotov.tinkoff",
 //                "ru.vzotov.gpb"
         }
 )
+@EnableScheduling
 @EnableAspectJAutoProxy
 public class Application extends SpringBootServletInitializer implements WebApplicationInitializer {
     public static void main(String[] args) {

@@ -14,10 +14,18 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   liquibase:
     enabled: false
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 3MB
+      max-request-size: 10MB
 
 server:
   servlet:
     context-path: /
+    encoding:
+      charset: utf-8
+      force-response: true
 
 nalogru:
   address: https://proverkacheka.nalog.ru:9999
