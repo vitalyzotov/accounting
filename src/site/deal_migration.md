@@ -1,6 +1,21 @@
 MySQL 8.0.27 is required to use JSON functions
 
-Deals are created from qr_operations table by using the following script 
+Create deals for transactions
+
+    insert into deal_ (`DEAL_UID`, `DATE`, `AMOUNT`, `CURRENCY`, `DESCRIPTION`, `COMMENT`, `CATEGORY_ID`)
+    select
+        uuid() as DEAL_UID,
+        (select `DATE` from operation_ where id=tx_.PRIMARY_OP) as `DATE`,
+        0 as AMOUNT,
+        (select `CURRENCY` from operation_ where id=tx_.PRIMARY_OP) as `CURRENCY`,
+        JSON_ARRAY(tx_.PRIMARY_OP, tx_.SECONDARY_OP) as DESCRIPTION,
+        JSON_ARRAY() as COMMENT,
+        (select `CATEGORY_ID` from operation_ where id=tx_.PRIMARY_OP) as `CATEGORY_ID`
+    from
+        tx_
+    ;
+
+Create deals from qr_operations table 
 
     insert into deal_ (`DEAL_UID`, `DATE`, `AMOUNT`, `CURRENCY`, `DESCRIPTION`, `COMMENT`, `CATEGORY_ID`)
     select
@@ -18,23 +33,7 @@ Deals are created from qr_operations table by using the following script
     ) as S2
     ;
 
-Also we create deals for transactions
-
-    insert into deal_ (`DEAL_UID`, `DATE`, `AMOUNT`, `CURRENCY`, `DESCRIPTION`, `COMMENT`, `CATEGORY_ID`)
-    select
-        uuid() as DEAL_UID,
-        (select `DATE` from operation_ where id=tx_.PRIMARY_OP) as `DATE`,
-        0 as AMOUNT,
-        (select `CURRENCY` from operation_ where id=tx_.PRIMARY_OP) as `CURRENCY`,
-        JSON_ARRAY(tx_.PRIMARY_OP, tx_.SECONDARY_OP) as DESCRIPTION,
-        JSON_ARRAY() as COMMENT,
-        (select `CATEGORY_ID` from operation_ where id=tx_.PRIMARY_OP) as `CATEGORY_ID`
-    from
-        tx_
-    ;
-
-
-We add deal operations 
+Add deal operations 
 
     insert into deal_operations (`DEAL_ID`, `OPERATION_ID`)
     select deals.id as `DEAL_ID`, j1.`OPERATION_ID` as `OPERATION_ID` from deal_ deals
@@ -45,7 +44,7 @@ We add deal operations
         )
     ) as J1;
 
-And we add deal receipts
+Add deal receipts
 
     insert into deal_receipts (`DEAL_ID`, `RECEIPT_ID`)
     SELECT deals.id AS `DEAL_ID`, QR.CHECK_ID as `RECEIPT_ID`
@@ -83,22 +82,25 @@ Add deal purchases
             END AS PURCHASE_ORDER,
             @dealId := DEAL_ID as DEAL_ID
         FROM (
-            SELECT
-                d.id AS DEAL_ID,
-                p1.PURCHASE_ID AS PURCHASE_ID
-            FROM deal_ AS d
-            LEFT JOIN deal_operations AS dop ON dop.DEAL_ID = d.ID
-            LEFT JOIN purchase_ AS p1 ON (p1.OPERATION_ID = dop.OPERATION_ID)
-            WHERE PURCHASE_ID IS NOT NULL
-            UNION
-            SELECT
-                d.id AS DEAL_ID,
-                p2.PURCHASE_ID AS PURCHASE_ID
-            FROM deal_ AS d
-            LEFT JOIN deal_receipts AS dor ON dor.DEAL_ID = d.ID
-            LEFT JOIN purchase_ AS p2 ON (p2.CHECK_ID = dor.RECEIPT_ID)
-            WHERE PURCHASE_ID IS NOT NULL
-            ORDER BY DEAL_ID ASC
+            SELECT min(u3.DEAL_ID) as DEAL_ID, u3.PURCHASE_ID as PURCHASE_ID FROM (
+                SELECT
+                    d.id AS DEAL_ID,
+                    p1.PURCHASE_ID AS PURCHASE_ID
+                FROM deal_ AS d
+                LEFT JOIN deal_operations AS dop ON dop.DEAL_ID = d.ID
+                LEFT JOIN purchase_ AS p1 ON (p1.OPERATION_ID = dop.OPERATION_ID)
+                WHERE PURCHASE_ID IS NOT NULL
+                UNION
+                SELECT
+                    d.id AS DEAL_ID,
+                    p2.PURCHASE_ID AS PURCHASE_ID
+                FROM deal_ AS d
+                LEFT JOIN deal_receipts AS dor ON dor.DEAL_ID = d.ID
+                LEFT JOIN purchase_ AS p2 ON (p2.CHECK_ID = dor.RECEIPT_ID)
+                WHERE PURCHASE_ID IS NOT NULL
+                ORDER BY DEAL_ID ASC
+            ) as u3
+            GROUP BY u3.PURCHASE_ID
         ) AS u1
         JOIN (SELECT @rownum := 0, @dealId := 0) AS r
         ORDER BY DEAL_ID, PURCHASE_ID

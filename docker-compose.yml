@@ -25,7 +25,7 @@ services:
     volumes:
       - ./alfabank_reports:/alfabank_reports
   accounting-database:
-    image: mysql:5.7
+    image: mysql:8.0.27
     command: --lower-case-table-names=1 --character-set-server=utf8 --collation-server=utf8_general_ci
     ports:
       - 3306:3306

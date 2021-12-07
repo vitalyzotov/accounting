@@ -14,6 +14,7 @@ import ru.vzotov.accounting.domain.model.DealRepository;
 import ru.vzotov.accounting.domain.model.OperationRepository;
 import ru.vzotov.banking.domain.model.Operation;
 import ru.vzotov.banking.domain.model.OperationCreatedEvent;
+import ru.vzotov.banking.domain.model.TransactionCreatedEvent;
 import ru.vzotov.cashreceipt.domain.model.CheckQRCode;
 import ru.vzotov.cashreceipt.domain.model.QRCodeRepository;
 import ru.vzotov.domain.model.Money;
@@ -53,11 +54,32 @@ public class DealServiceImpl implements DealService {
         createDealForOperation(operation);
     }
 
+    @EventListener
+    @Transactional("accounting-tx")
+    public void onTransactionCreated(TransactionCreatedEvent event) {
+        Validate.notNull(event);
+
+        Deal primary = dealRepository.findByOperation(event.primary());
+        Validate.notNull(primary);
+
+        Deal secondary = dealRepository.findByOperation(event.secondary());
+        Validate.notNull(secondary);
+
+        primary.join(secondary);
+        dealRepository.delete(secondary);
+        dealRepository.store(primary);
+    }
+
     @Scheduled(initialDelay = 40 * 1000, fixedDelay = 30 * 60 * 1000)
     @Transactional("accounting-tx")
     public void createDealsForOperations() {
-        processOperationsWithoutDeals();
-        processReceiptsWithoutDeals();
+        log.info("Start: Automatically create deals for operations and receipts");
+        try {
+            processOperationsWithoutDeals();
+            processReceiptsWithoutDeals();
+        } finally {
+            log.info("Finish: Automatically create deals for operations and receipts");
+        }
     }
 
     private void createDealForOperation(Operation operation) {
