@@ -4,8 +4,11 @@ import org.apache.commons.lang.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vzotov.accounting.application.DealService;
 import ru.vzotov.accounting.domain.model.Deal;
@@ -16,6 +19,7 @@ import ru.vzotov.banking.domain.model.Operation;
 import ru.vzotov.banking.domain.model.OperationCreatedEvent;
 import ru.vzotov.banking.domain.model.TransactionCreatedEvent;
 import ru.vzotov.cashreceipt.domain.model.CheckQRCode;
+import ru.vzotov.cashreceipt.domain.model.QRCodeCreatedEvent;
 import ru.vzotov.cashreceipt.domain.model.QRCodeRepository;
 import ru.vzotov.domain.model.Money;
 
@@ -52,6 +56,20 @@ public class DealServiceImpl implements DealService {
         }
 
         createDealForOperation(operation);
+    }
+
+    @Async
+    @EventListener
+    @Transactional(value = "accounting-tx", isolation = Isolation.READ_UNCOMMITTED)
+    public void onQRCodeCreated(QRCodeCreatedEvent event) {
+        Validate.notNull(event);
+        CheckQRCode qrCode = qrCodeRepository.find(event.receiptId());
+        if(qrCode == null) {
+            log.error("Unable to create deal. QR code not found: {}", event.receiptId().value());
+            return;
+        }
+
+        createDealForQrCode(qrCode);
     }
 
     @EventListener
