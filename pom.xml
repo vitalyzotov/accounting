@@ -41,7 +41,6 @@
         <gov.model.version>1.3</gov.model.version>
 <!--        <cashreceipt.model.version>1.51</cashreceipt.model.version>-->
 
-        <cashreceipt.module.version>1.39-SNAPSHOT</cashreceipt.module.version>
         <accounting.module.version>1.54-SNAPSHOT</accounting.module.version>
 
         <alfabank.module.version>1.15-SNAPSHOT</alfabank.module.version>
@@ -52,12 +51,6 @@
     <dependencyManagement>
         <dependencies>
             <!-- Own modules -->
-            <dependency>
-                <groupId>ru.vzotov</groupId>
-                <artifactId>cashreceipt-module</artifactId>
-                <version>${cashreceipt.module.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>ru.vzotov</groupId>
                 <artifactId>accounting-module</artifactId>
@@ -178,11 +171,6 @@
         <!--
         Internal dependencies
         -->
-        <dependency>
-            <groupId>ru.vzotov</groupId>
-            <artifactId>cashreceipt-module</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>ru.vzotov</groupId>
             <artifactId>accounting-module</artifactId>
