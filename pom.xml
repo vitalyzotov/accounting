@@ -23,6 +23,7 @@
         <junit.version>4.13.1</junit.version>
 
         <assertj.version>3.19.0</assertj.version>
+        <rest-assured.version>4.4.0</rest-assured.version>
 
         <logback.version>1.2.6</logback.version>
         <slf4j.version>1.7.32</slf4j.version>
@@ -37,13 +38,11 @@
         <nalogru.password>password</nalogru.password>
 
         <!-- Own modules -->
-        <ddd.version>1.1</ddd.version>
-        <gov.model.version>1.3</gov.model.version>
-<!--        <cashreceipt.model.version>1.51</cashreceipt.model.version>-->
+        <ddd.version>1.4</ddd.version>
+        <gov.model.version>1.6</gov.model.version>
+        <accounting.module.version>1.54</accounting.module.version>
 
-        <accounting.module.version>1.54-SNAPSHOT</accounting.module.version>
-
-        <alfabank.module.version>1.15-SNAPSHOT</alfabank.module.version>
+        <alfabank.module.version>1.15</alfabank.module.version>
         <tinkoff.module.version>1.12</tinkoff.module.version>
         <gpb.module.version>1.8</gpb.module.version>
     </properties>
@@ -74,12 +73,6 @@
                 <artifactId>gpb-module</artifactId>
                 <version>${gpb.module.version}</version>
             </dependency>-->
-
-<!--            <dependency>-->
-<!--                <groupId>ru.vzotov</groupId>-->
-<!--                <artifactId>cashreceipt-model</artifactId>-->
-<!--                <version>${cashreceipt.model.version}</version>-->
-<!--            </dependency>-->
 
             <dependency>
                 <groupId>ru.vzotov</groupId>
@@ -240,7 +233,7 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>4.2.0</version>
+            <version>${rest-assured.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -477,17 +470,15 @@
 
     <distributionManagement>
         <repository>
-            <id>github-vzotov</id>
-            <name>GitHub vitalyzotov Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/vitalyzotov/maven</url>
+            <id>vzotov-releases</id>
+            <url>https://maven.vzotov.ru/repository/maven-everyone</url>
         </repository>
     </distributionManagement>
 
     <repositories>
         <repository>
-            <id>github-vzotov</id>
-            <name>GitHub vitalyzotov Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/vitalyzotov/maven</url>
+            <id>vzotov-releases</id>
+            <url>https://maven.vzotov.ru/repository/maven-everyone</url>
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>daily</updatePolicy>
