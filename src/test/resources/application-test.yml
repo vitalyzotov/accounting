@@ -34,13 +34,13 @@ nalogru2:
 
 alfabank:
   reports:
-    path: alfabank_reports
+    path: target/data/alfabank_reports
 tinkoff:
   reports:
-    path: tinkoff_reports
+    path: target/data/tinkoff_reports
 gazprombank:
   reports:
-    path: gpb_reports
+    path: target/data/gpb_reports
     skip:
       - "3852360"
       - "123456"

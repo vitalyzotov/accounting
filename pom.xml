@@ -371,6 +371,25 @@
 
     <build>
         <plugins>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-directories</id>
+                        <phase>initialize</phase>
+                        <configuration>
+                            <tasks>
+                                <mkdir dir="target/data/alfabank_reports"/>
+                                <mkdir dir="target/data/tinkoff_reports"/>
+                                <mkdir dir="target/data/gpb_reports"/>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
