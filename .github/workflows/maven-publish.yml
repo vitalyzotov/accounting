@@ -35,18 +35,10 @@ jobs:
           MAVEN_REPO_USERNAME: github-publisher
           MAVEN_REPO_PASSWORD: ${{ secrets.MAVEN_REPO_PASSWORD }}
 
-      - name: Set up docker registry
-        uses: actions/setup-java@v2
-        with:
-          java-version: '8'
-          distribution: 'adopt'
-          server-id: docker.vzotov.ru
-          server-username: DOCKER_REPO_USERNAME
-          server-password: DOCKER_REPO_PASSWORD
-          settings-path: ${{ github.workspace }} # location for the settings.xml file
-
       - name: Push docker image
-        run: mvn -B dockerfile:push -P docker --file pom.xml -s $GITHUB_WORKSPACE/settings.xml
+        run: mvn -B dockerfile:push -P docker -Ddockerfile.useMavenSettingsForAuth=false -Ddockerfile.username=$DOCKER_REPO_USERNAME -Ddockerfile.password=$DOCKER_REPO_PASSWORD --file pom.xml -s $GITHUB_WORKSPACE/settings.xml
         env:
+          MAVEN_REPO_USERNAME: github-publisher
+          MAVEN_REPO_PASSWORD: ${{ secrets.MAVEN_REPO_PASSWORD }}
           DOCKER_REPO_USERNAME: github-publisher
           DOCKER_REPO_PASSWORD: ${{ secrets.MAVEN_REPO_PASSWORD }}
