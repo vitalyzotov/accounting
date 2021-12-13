@@ -21,7 +21,7 @@ import java.util.stream.Stream;
                 "ru.vzotov.cashreceipt",
                 "ru.vzotov.accounting",
                 "ru.vzotov.alfabank",
-//                "ru.vzotov.tinkoff",
+                "ru.vzotov.tinkoff",
 //                "ru.vzotov.gpb"
         }
 )

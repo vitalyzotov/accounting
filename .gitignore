@@ -25,6 +25,8 @@ hs_err_pid*
 # Development environment data
 mysql/
 alfabank_reports/
+tinkoff_reports/
+gpb_reports/
 
 # IntelliJ project files
 .idea/
