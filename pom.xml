@@ -44,7 +44,7 @@
 
         <alfabank.module.version>1.15</alfabank.module.version>
         <tinkoff.module.version>1.13</tinkoff.module.version>
-        <gpb.module.version>1.8</gpb.module.version>
+        <gpb.module.version>1.10</gpb.module.version>
     </properties>
 
     <dependencyManagement>
@@ -68,11 +68,11 @@
                 <version>${tinkoff.module.version}</version>
             </dependency>
 
-            <!--<dependency>
+            <dependency>
                 <groupId>ru.vzotov</groupId>
                 <artifactId>gpb-module</artifactId>
                 <version>${gpb.module.version}</version>
-            </dependency>-->
+            </dependency>
 
             <dependency>
                 <groupId>ru.vzotov</groupId>
@@ -179,12 +179,10 @@
             <artifactId>tinkoff-module</artifactId>
         </dependency>
 
-        <!--
         <dependency>
             <groupId>ru.vzotov</groupId>
             <artifactId>gpb-module</artifactId>
         </dependency>
-        -->
 
         <!--
         Testing
