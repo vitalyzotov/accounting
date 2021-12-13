@@ -6,7 +6,7 @@
 
     <groupId>ru.vzotov</groupId>
     <artifactId>accounting</artifactId>
-    <version>1.111</version>
+    <version>1.112-SNAPSHOT</version>
     <name>Application: accounting</name>
 
     <properties>
