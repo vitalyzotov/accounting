@@ -40,7 +40,7 @@
         <!-- Own modules -->
         <ddd.version>1.4</ddd.version>
         <gov.model.version>1.6</gov.model.version>
-        <accounting.module.version>1.56</accounting.module.version>
+        <accounting.module.version>1.57-SNAPSHOT</accounting.module.version>
 
         <alfabank.module.version>1.15</alfabank.module.version>
         <tinkoff.module.version>1.13</tinkoff.module.version>
@@ -480,7 +480,7 @@
                 <plugin>
                     <groupId>com.spotify</groupId>
                     <artifactId>dockerfile-maven-plugin</artifactId>
-                    <version>1.4.13</version>
+                    <version>1.4.10</version>
                     <configuration>
                         <repository>docker.vzotov.ru/vzotov/accounting-application</repository>
                         <tag>${project.version}</tag>
