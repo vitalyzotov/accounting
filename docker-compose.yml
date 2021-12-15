@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   accounting-application:
-    image: docker.vzotov.ru/vzotov/accounting-application:1.108-SNAPSHOT
+    image: docker.vzotov.ru/vzotov/accounting-application:1.112-SNAPSHOT
     ports:
       - 8080:8080
       - 5005:5005
@@ -24,6 +24,8 @@ services:
       - NALOGRU2_PASSWORD=654321
     volumes:
       - ./alfabank_reports:/alfabank_reports
+      - ./tinkoff_reports:/tinkoff_reports
+      - ./gpb_reports:/gpb_reports
   accounting-database:
     image: mysql:8.0.27
     command: --lower-case-table-names=1 --character-set-server=utf8 --collation-server=utf8_general_ci
