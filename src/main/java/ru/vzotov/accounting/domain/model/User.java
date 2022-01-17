@@ -5,7 +5,10 @@ import ru.vzotov.banking.domain.model.Person;
 import ru.vzotov.ddd.shared.AggregateRoot;
 import ru.vzotov.ddd.shared.Entity;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @AggregateRoot
 public class User implements Entity<User> {
@@ -16,14 +19,20 @@ public class User implements Entity<User> {
 
     private Person person;
 
-    public User(String name, String password, Person person) {
+    private String roles;
+
+    private List<String> rolesList;
+
+    public User(String name, String password, Person person, List<String> roles) {
         Validate.notEmpty(name);
         Validate.notEmpty(password);
         Validate.notNull(person);
+        Validate.notEmpty(roles);
 
         this.name = name;
         this.password = password;
         this.person = person;
+        this.roles = String.join(",", roles);
     }
 
     public String name() {
@@ -36,6 +45,16 @@ public class User implements Entity<User> {
 
     public Person person() {
         return person;
+    }
+
+    public List<String> roles() {
+        if(rolesList == null) {
+            rolesList = Arrays.stream(roles.split(","))
+                    .map(String::trim)
+                    .filter(s -> !s.isEmpty())
+                    .collect(Collectors.toList());
+        }
+        return rolesList;
     }
 
     @Override

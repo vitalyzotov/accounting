@@ -9,6 +9,8 @@ import ru.vzotov.accounting.interfaces.accounting.facade.UserManagementFacade;
 import ru.vzotov.banking.domain.model.Person;
 import ru.vzotov.banking.domain.model.PersonId;
 
+import java.util.Collections;
+
 @Service
 public class UserManagementFacadeImpl implements UserManagementFacade {
 
@@ -26,9 +28,10 @@ public class UserManagementFacadeImpl implements UserManagementFacade {
     @Transactional(value = "accounting-app-tx")
     public User registerNewUser(String name, String password, String firstName, String lastName, String displayName) {
         Person person = new Person(PersonId.nextId(), firstName, lastName, displayName);
-        User user = new User(name, passwordEncoder.encode(password), person);
+        User user = new User(name, passwordEncoder.encode(password), person, Collections.singletonList("ROLE_USER"));
 
         userRepository.store(user);
+
         return user;
     }
 }

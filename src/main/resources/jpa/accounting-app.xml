@@ -41,12 +41,16 @@
             <basic name="password">
                 <column name="PASSWORD" nullable="false" length="255"/>
             </basic>
+            <basic name="roles">
+                <column name="ROLES" nullable="false" length="512"/>
+            </basic>
             <one-to-one name="person">
                 <join-column name="PERSON_ID"/>
                 <cascade>
                     <cascade-all/>
                 </cascade>
             </one-to-one>
+            <transient name="rolesList"/>
         </attributes>
     </entity>
 </entity-mappings>
