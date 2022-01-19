@@ -9,9 +9,9 @@
 
     <changeSet id="persons" author="vzotov">
         <sql>
-            INSERT INTO PERSON_ (PERSON_UID, FIRST_NAME, LAST_NAME, DISPLAY_NAME) VALUES ('vzotov', 'Vitaly', 'Zotov', 'Dad');
-            INSERT INTO PERSON_ (PERSON_UID, FIRST_NAME, LAST_NAME, DISPLAY_NAME) VALUES ('stranger', 'John', 'Snow', 'Jonny');
-            INSERT INTO PERSON_ (PERSON_UID, FIRST_NAME, LAST_NAME, DISPLAY_NAME) VALUES ('admin', 'Vitaly', 'Zotov', 'Admin');
+            INSERT INTO PERSON_ (PERSON_UID, FIRST_NAME, LAST_NAME, DISPLAY_NAME) VALUES ('0bf4afa9-763e-43eb-86c5-5d1898c345d2', 'Vitaly', 'Zotov', 'Dad');
+            INSERT INTO PERSON_ (PERSON_UID, FIRST_NAME, LAST_NAME, DISPLAY_NAME) VALUES ('d46dfa2f-6f1e-45ca-9f92-80160a5132ca', 'John', 'Snow', 'Jonny');
+            INSERT INTO PERSON_ (PERSON_UID, FIRST_NAME, LAST_NAME, DISPLAY_NAME) VALUES ('b68e53ec-62f9-42d3-954f-4400edf9aa1a', 'Vitaly', 'Zotov', 'Admin');
         </sql>
     </changeSet>
 
@@ -19,9 +19,9 @@
         <sql>
             INSERT INTO USER_ (PERSON_ID, NAME, ROLES, PASSWORD)
             VALUES
-            ((SELECT ID FROM PERSON_ WHERE PERSON_UID='vzotov'), 'vzotov', 'ROLE_USER','$e0801$KXyxGzCTbPwQg05KsJe8qF9c+HH8aJ4zHxohrQ6CB/XuThMbDhF4dZvzc80cQndpFV22GJ30idNcEJHTjt5Y+g==$PTlNo04FfGChMPbQ2SYphjR+MH0bPfXa7sIivdLw4so='),
-            ((SELECT ID FROM PERSON_ WHERE PERSON_UID='stranger'), 'stranger', 'ROLE_USER', '$e0801$KXyxGzCTbPwQg05KsJe8qF9c+HH8aJ4zHxohrQ6CB/XuThMbDhF4dZvzc80cQndpFV22GJ30idNcEJHTjt5Y+g==$PTlNo04FfGChMPbQ2SYphjR+MH0bPfXa7sIivdLw4so='),
-            ((SELECT ID FROM PERSON_ WHERE PERSON_UID='admin'), 'admin', 'ROLE_ADMIN', '$e0801$KXyxGzCTbPwQg05KsJe8qF9c+HH8aJ4zHxohrQ6CB/XuThMbDhF4dZvzc80cQndpFV22GJ30idNcEJHTjt5Y+g==$PTlNo04FfGChMPbQ2SYphjR+MH0bPfXa7sIivdLw4so=')
+            ((SELECT ID FROM PERSON_ WHERE PERSON_UID='0bf4afa9-763e-43eb-86c5-5d1898c345d2'), 'vzotov', 'ROLE_USER','$e0801$KXyxGzCTbPwQg05KsJe8qF9c+HH8aJ4zHxohrQ6CB/XuThMbDhF4dZvzc80cQndpFV22GJ30idNcEJHTjt5Y+g==$PTlNo04FfGChMPbQ2SYphjR+MH0bPfXa7sIivdLw4so='),
+            ((SELECT ID FROM PERSON_ WHERE PERSON_UID='d46dfa2f-6f1e-45ca-9f92-80160a5132ca'), 'stranger', 'ROLE_USER', '$e0801$KXyxGzCTbPwQg05KsJe8qF9c+HH8aJ4zHxohrQ6CB/XuThMbDhF4dZvzc80cQndpFV22GJ30idNcEJHTjt5Y+g==$PTlNo04FfGChMPbQ2SYphjR+MH0bPfXa7sIivdLw4so='),
+            ((SELECT ID FROM PERSON_ WHERE PERSON_UID='b68e53ec-62f9-42d3-954f-4400edf9aa1a'), 'admin', 'ROLE_ADMIN', '$e0801$KXyxGzCTbPwQg05KsJe8qF9c+HH8aJ4zHxohrQ6CB/XuThMbDhF4dZvzc80cQndpFV22GJ30idNcEJHTjt5Y+g==$PTlNo04FfGChMPbQ2SYphjR+MH0bPfXa7sIivdLw4so=')
             ;
 
             INSERT INTO acl_sid (id, principal, sid)
@@ -50,7 +50,7 @@
     <changeSet id="test1" author="vzotov">
         <sql>
             INSERT INTO ACCOUNT_ (ACCOUNT_NUMBER, NAME, ACCOUNT_OWNER)
-            VALUES ('40817810108290123456', 'Зарплатный счет', 'vzotov');
+            VALUES ('40817810108290123456', 'Зарплатный счет', '0bf4afa9-763e-43eb-86c5-5d1898c345d2');
         </sql>
     </changeSet>
 

@@ -4,7 +4,7 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
 
-    <entity name="Person" class="ru.vzotov.banking.domain.model.Person" access="FIELD">
+    <entity name="Person" class="ru.vzotov.person.domain.model.Person" access="FIELD">
         <table name="PERSON_"/>
         <attributes>
             <id name="id">

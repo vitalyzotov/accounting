@@ -1,7 +1,7 @@
 package ru.vzotov.accounting.domain.model;
 
 import org.apache.commons.lang.Validate;
-import ru.vzotov.banking.domain.model.Person;
+import ru.vzotov.person.domain.model.Person;
 import ru.vzotov.ddd.shared.AggregateRoot;
 import ru.vzotov.ddd.shared.Entity;
 

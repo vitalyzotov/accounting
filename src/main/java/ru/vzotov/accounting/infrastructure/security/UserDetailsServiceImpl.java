@@ -9,10 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vzotov.accounting.domain.model.User;
 import ru.vzotov.accounting.domain.model.UserRepository;
+import ru.vzotov.person.domain.model.Person;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Transactional(value = "accounting-app-tx", readOnly = true)
@@ -39,16 +40,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return new org.springframework.security.core.userdetails.User(
                 user.name(), user.password(),
-                enabled, accountNonExpired, credentialsNonExpired, accountNonLocked,
-                getAuthorities(user.roles()));
+                enabled,
+                accountNonExpired,
+                credentialsNonExpired,
+                accountNonLocked,
+                getAuthorities(user.roles(), user.person()));
 
     }
 
-    private static List<GrantedAuthority> getAuthorities(List<String> roles) {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        for (String role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role));
-        }
-        return authorities;
+    private static List<GrantedAuthority> getAuthorities(List<String> roles, Person person) {
+        return Stream.concat(Stream.of(person.personId().authority()), roles.stream())
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
     }
 }

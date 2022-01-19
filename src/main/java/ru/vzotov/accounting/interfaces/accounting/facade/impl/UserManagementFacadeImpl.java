@@ -6,8 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.vzotov.accounting.domain.model.User;
 import ru.vzotov.accounting.domain.model.UserRepository;
 import ru.vzotov.accounting.interfaces.accounting.facade.UserManagementFacade;
-import ru.vzotov.banking.domain.model.Person;
-import ru.vzotov.banking.domain.model.PersonId;
+import ru.vzotov.person.domain.model.Person;
+import ru.vzotov.person.domain.model.PersonId;
 
 import java.util.Collections;
 
