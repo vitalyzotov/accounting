@@ -31,7 +31,9 @@ public class AccountsControllerTest {
 
     public static final String GPB_ACCOUNT = "40817810418370123456";
     private static final String ME = "vzotov";
+    private static final String ME_PERSON_ID = "0bf4afa9-763e-43eb-86c5-5d1898c345d2";
     private static final String STRANGER = "stranger";
+    private static final String STRANGER_PERSON_ID = "d46dfa2f-6f1e-45ca-9f92-80160a5132ca";
     private static final String PASSWORD = "1password*";
     private static final String MAIN_ACCOUNT = "40817810108290123456";
 
@@ -145,7 +147,7 @@ public class AccountsControllerTest {
         data.put("name", "Gazprombank");
         data.put("bankId", BankId.GAZPROMBANK.value());
         data.put("currency", "RUR");
-        data.put("owner", ME);
+        data.put("owner", ME_PERSON_ID);
         data.put("aliases", new String[]{"17416127"});
 
         given().contentType(JSON).body(data)
@@ -179,7 +181,7 @@ public class AccountsControllerTest {
         data.put("name", "Salary account");
         data.put("bankId", BankId.ALFABANK.value());
         data.put("currency", "RUR");
-        data.put("owner", ME);
+        data.put("owner", ME_PERSON_ID);
         data.put("aliases", new String[0]);
 
         given().contentType(JSON).body(data)
@@ -201,7 +203,7 @@ public class AccountsControllerTest {
         data.put("name", "Salary account");
         data.put("bankId", BankId.ALFABANK.value());
         data.put("currency", "RUR");
-        data.put("owner", STRANGER);
+        data.put("owner", STRANGER_PERSON_ID);
         data.put("aliases", new String[0]);
 
         given().contentType(JSON).body(data)

@@ -48,7 +48,7 @@ gazprombank:
 accounting:
   security: production
   liquibase:
-    change-log: classpath*:db.accounting-tests.xml
+    change-log: classpath:db.accounting-tests.xml
     enabled: true
 
 logging:
