@@ -6,7 +6,7 @@
     <changeSet id="2" author="vzotov">
         <createTable tableName="acl_sid">
             <column name="id" type="BIGINT UNSIGNED" autoIncrement="true">
-                <constraints nullable="false"/>
+                <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="principal" type="BOOLEAN">
                 <constraints nullable="false"/>
@@ -18,7 +18,7 @@
 
         <createTable tableName="acl_class">
             <column name="id" type="BIGINT UNSIGNED" autoIncrement="true">
-                <constraints nullable="false"/>
+                <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="class" type="VARCHAR(100)">
                 <constraints nullable="false"/>
@@ -28,7 +28,7 @@
 
         <createTable tableName="acl_object_identity">
             <column name="id" type="BIGINT UNSIGNED" autoIncrement="true">
-                <constraints nullable="false"/>
+                <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="object_id_class" type="BIGINT UNSIGNED">
                 <constraints nullable="false"/>
@@ -45,7 +45,7 @@
 
         <createTable tableName="acl_entry">
             <column name="id" type="BIGINT UNSIGNED" autoIncrement="true">
-                <constraints nullable="false"/>
+                <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="acl_object_identity" type="BIGINT UNSIGNED">
                 <constraints nullable="false"/>

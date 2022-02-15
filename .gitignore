@@ -34,3 +34,4 @@ gpb_reports/
 
 # Maven
 /target/
+/dump.sql

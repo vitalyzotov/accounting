@@ -42,5 +42,6 @@ services:
       - MYSQL_DATABASE=accounting
     volumes:
       - ./mysql:/var/lib/mysql
+      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
 networks:
   accounting-network:
