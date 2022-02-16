@@ -33,17 +33,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("No user found with username: " + username);
         }
 
-        final boolean enabled = true;
-        final boolean accountNonExpired = true;
-        final boolean credentialsNonExpired = true;
-        final boolean accountNonLocked = true;
-
-        return new org.springframework.security.core.userdetails.User(
+        return new ru.vzotov.accounting.infrastructure.security.User(
                 user.name(), user.password(),
-                enabled,
-                accountNonExpired,
-                credentialsNonExpired,
-                accountNonLocked,
+                new SimpleGrantedAuthority(user.person().personId().authority()),
                 getAuthorities(user.roles(), user.person()));
 
     }
