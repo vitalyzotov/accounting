@@ -40,11 +40,11 @@
         <!-- Own modules -->
         <ddd.version>1.4</ddd.version>
         <gov.model.version>1.6</gov.model.version>
-        <accounting.module.version>1.64-SNAPSHOT</accounting.module.version>
+        <accounting.module.version>1.64</accounting.module.version>
 
-        <alfabank.module.version>1.16</alfabank.module.version>
-        <tinkoff.module.version>1.14</tinkoff.module.version>
-        <gpb.module.version>1.11</gpb.module.version>
+        <alfabank.module.version>1.17</alfabank.module.version>
+        <tinkoff.module.version>1.15</tinkoff.module.version>
+        <gpb.module.version>1.12</gpb.module.version>
     </properties>
 
     <dependencyManagement>
