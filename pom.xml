@@ -40,7 +40,7 @@
         <!-- Own modules -->
         <ddd.version>1.4</ddd.version>
         <gov.model.version>1.6</gov.model.version>
-        <accounting.module.version>1.65</accounting.module.version>
+        <accounting.module.version>1.66</accounting.module.version>
 
         <alfabank.module.version>1.17</alfabank.module.version>
         <tinkoff.module.version>1.15</tinkoff.module.version>
