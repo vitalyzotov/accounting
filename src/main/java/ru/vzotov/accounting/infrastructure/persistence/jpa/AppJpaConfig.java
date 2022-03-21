@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import ru.vzotov.accounting.domain.model.PersonRepository;
 import ru.vzotov.accounting.domain.model.UserRepository;
 
 import javax.persistence.EntityManager;
@@ -25,6 +26,12 @@ public class AppJpaConfig {
     @ConditionalOnMissingBean
     public UserRepository userRepository(@Qualifier("accounting-app-emf") EntityManager em) {
         return new UserRepositoryJpa(em);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public PersonRepository personRepository(@Qualifier("accounting-app-emf") EntityManager em) {
+        return new PersonRepositoryJpa(em);
     }
 
     @Bean("accounting-app-emf")
