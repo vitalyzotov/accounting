@@ -7,7 +7,7 @@
     <groupId>ru.vzotov</groupId>
     <artifactId>accounting</artifactId>
     <version>1.124-SNAPSHOT</version>
-    <name>Application: accounting</name>
+    <name>[Application] accounting</name>
 
     <properties>
         <docker.host>tcp://127.0.0.1:2375</docker.host>
@@ -40,7 +40,7 @@
         <!-- Own modules -->
         <ddd.version>1.4</ddd.version>
         <gov.model.version>1.6</gov.model.version>
-        <accounting.module.version>1.67</accounting.module.version>
+        <accounting.module.version>1.68</accounting.module.version>
 
         <alfabank.module.version>1.17</alfabank.module.version>
         <tinkoff.module.version>1.15</tinkoff.module.version>
