@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   accounting-application:
-    image: docker.vzotov.ru/vzotov/accounting-application:1.115-SNAPSHOT
+    image: docker.vzotov.ru/vzotov/accounting-application:1.126
     ports:
       - 8080:8080
       - 5005:5005

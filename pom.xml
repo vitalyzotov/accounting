@@ -15,10 +15,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <resource.delimiter>^</resource.delimiter>
 
-        <spring.boot.version>2.5.6</spring.boot.version>
-        <spring.version>5.3.12</spring.version>
+        <spring.boot.version>2.5.14</spring.boot.version>
+        <spring.version>5.3.27</spring.version>
         <java.version>1.8</java.version>
-        <jackson.version>2.12.5</jackson.version>
+        <jackson.version>2.12.7</jackson.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <junit.version>4.13.1</junit.version>
 
@@ -40,7 +40,7 @@
         <!-- Own modules -->
         <ddd.version>1.4</ddd.version>
         <gov.model.version>1.6</gov.model.version>
-        <accounting.module.version>1.69</accounting.module.version>
+        <accounting.module.version>1.70</accounting.module.version>
 
         <alfabank.module.version>1.17</alfabank.module.version>
         <tinkoff.module.version>1.15</tinkoff.module.version>
@@ -500,7 +500,7 @@
                 <plugin>
                     <groupId>com.spotify</groupId>
                     <artifactId>dockerfile-maven-plugin</artifactId>
-                    <version>1.4.10</version>
+                    <version>1.4.13</version>
                     <configuration>
                         <repository>docker.vzotov.ru/vzotov/accounting-application</repository>
                         <tag>${project.version}</tag>

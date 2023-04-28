@@ -2,9 +2,13 @@
 
 ## Running locally
 
+Build docker image
+
+    mvn package -P docker
+
 You can use docker-compose to run this application locally.
 
-    docker-compose up -d
+    docker compose up -d
 
 Cleanup
 
