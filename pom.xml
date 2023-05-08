@@ -32,6 +32,7 @@
 
         <mockito.version>3.9.0</mockito.version>
         <bouncycastle.version>1.69</bouncycastle.version>
+        <jwt.version>0.11.5</jwt.version>
 
         <!-- -->
         <nalogru.username>user</nalogru.username>
@@ -40,11 +41,11 @@
         <!-- Own modules -->
         <ddd.version>1.4</ddd.version>
         <gov.model.version>1.6</gov.model.version>
-        <accounting.module.version>1.70</accounting.module.version>
+        <accounting.module.version>1.71</accounting.module.version>
 
-        <alfabank.module.version>1.17</alfabank.module.version>
-        <tinkoff.module.version>1.15</tinkoff.module.version>
-        <gpb.module.version>1.12</gpb.module.version>
+        <alfabank.module.version>1.18</alfabank.module.version>
+        <tinkoff.module.version>1.16</tinkoff.module.version>
+        <gpb.module.version>1.13</gpb.module.version>
     </properties>
 
     <dependencyManagement>
@@ -156,7 +157,6 @@
                 <artifactId>bcprov-jdk15on</artifactId>
                 <version>${bouncycastle.version}</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
 
@@ -339,6 +339,25 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
+        </dependency>
+
+        <!-- JWT -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>${jwt.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <!--

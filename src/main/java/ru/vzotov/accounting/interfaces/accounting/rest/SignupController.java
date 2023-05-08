@@ -10,7 +10,7 @@ import ru.vzotov.accounting.domain.model.User;
 import ru.vzotov.accounting.interfaces.accounting.facade.UserManagementFacade;
 
 @RestController
-@RequestMapping("/signup")
+@RequestMapping("/auth/signup")
 @CrossOrigin
 public class SignupController {
 

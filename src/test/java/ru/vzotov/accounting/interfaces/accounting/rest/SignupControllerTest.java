@@ -49,7 +49,7 @@ public class SignupControllerTest {
                 .contentType(JSON)
                 .body(data).
                 when()
-                .post("/signup").
+                .post("/auth/signup").
                 then()
                 .assertThat()
                 .statusCode(HttpStatus.OK.value())

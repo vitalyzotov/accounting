@@ -65,7 +65,12 @@ gazprombank:
       - "3852360"
       - "1234567"
 
-debug: true
+jwt:
+  secret:
+    access: NjI5ZmFiOGIzODM1YzNjOGQzY2M1Nzg2YTQ1MDIwNDY3ZDQzZTM5ODA1ZjBlZWQ0MmExYWE1YzBkMWZlNWM2Yg==
+    refresh: M2Y2OTkzZTQ1NjE5MzcwZGIzNThhMThkY2UyNTY4MzIwM2VjZGY0MDk0N2EzMTI1NWU4NjQwYWM5ZGNhYTAwZQ==
+
+debug: false
 
 logging:
   level:

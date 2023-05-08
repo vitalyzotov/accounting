@@ -35,3 +35,5 @@ gpb_reports/
 # Maven
 /target/
 /dump.sql
+/nginx/certs/**
+/nginx/dhparam/**
