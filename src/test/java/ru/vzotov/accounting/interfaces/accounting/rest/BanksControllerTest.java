@@ -1,15 +1,13 @@
 package ru.vzotov.accounting.interfaces.accounting.rest;
 
 import io.restassured.RestAssured;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 import ru.vzotov.banking.domain.model.BankId;
 
 import java.util.HashMap;
@@ -21,7 +19,6 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.yml")
 @ActiveProfiles("test")
@@ -56,7 +53,7 @@ public class BanksControllerTest {
     @LocalServerPort
     int port;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         RestAssured.port = port;
     }
