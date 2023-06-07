@@ -10,8 +10,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import ru.vzotov.accounting.domain.model.PersonRepository;
 import ru.vzotov.accounting.domain.model.UserRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @Configuration("jpa-accounting-app")
@@ -49,4 +49,10 @@ public class AppJpaConfig {
         transactionManager.setEntityManagerFactory(emf);
         return transactionManager;
     }
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("accounting-emf") LocalContainerEntityManagerFactoryBean bean) {
+        return bean;
+    }
+
 }

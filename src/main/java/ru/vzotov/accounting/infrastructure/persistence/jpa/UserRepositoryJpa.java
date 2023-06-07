@@ -4,8 +4,8 @@ import ru.vzotov.accounting.domain.model.User;
 import ru.vzotov.accounting.domain.model.UserRepository;
 import ru.vzotov.person.domain.model.PersonId;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 
 public class UserRepositoryJpa extends JpaRepository implements UserRepository {
 

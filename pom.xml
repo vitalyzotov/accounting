@@ -19,25 +19,13 @@
         <resource.delimiter>^</resource.delimiter>
 
         <!-- Spring -->
-        <spring.boot.version>2.7.12</spring.boot.version>
-        <spring.version>5.3.27</spring.version>
-
-        <!-- Commons -->
-        <jackson.version>2.13.5</jackson.version>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
-
-        <!-- Logging -->
-        <logback.version>1.2.12</logback.version>
-        <slf4j.version>1.7.36</slf4j.version>
+        <spring.boot.version>3.1.0</spring.boot.version>
 
         <!-- Other -->
         <bouncycastle.version>1.69</bouncycastle.version>
         <jwt.version>0.11.5</jwt.version>
 
         <!-- Testing -->
-        <junit.version>5.8.2</junit.version>
-        <restassured.version>4.4.0</restassured.version>
-        <assertj.version>3.24.2</assertj.version>
         <jacoco.version>0.8.10</jacoco.version>
 
         <!-- -->
@@ -101,63 +89,6 @@
                 <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-engine</artifactId>
-                <version>${junit.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.assertj</groupId>
-                <artifactId>assertj-core</artifactId>
-                <version>${assertj.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-<!--            <dependency>-->
-<!--                <groupId>org.mockito</groupId>-->
-<!--                <artifactId>mockito-core</artifactId>-->
-<!--                <version>${mockito.version}</version>-->
-<!--                <scope>test</scope>-->
-<!--            </dependency>-->
-
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>${commons-lang3.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-core</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.fasterxml.jackson.datatype</groupId>
-                <artifactId>jackson-datatype-jsr310</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>${logback.version}</version>
             </dependency>
 
             <!-- Security -->
@@ -235,7 +166,6 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>${restassured.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -277,6 +207,11 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-acl</artifactId>
         </dependency>
@@ -295,6 +230,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <!-- Cache -->
+        <dependency>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <classifier>jakarta</classifier>
         </dependency>
 
         <!-- Security -->
@@ -329,8 +276,8 @@
         REST
         -->
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
         </dependency>
 
         <!--
@@ -371,11 +318,6 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.5.12</version>
-        </dependency>
-
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
         </dependency>
     </dependencies>
 

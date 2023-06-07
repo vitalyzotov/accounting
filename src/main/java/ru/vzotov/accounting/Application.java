@@ -1,18 +1,19 @@
 package ru.vzotov.accounting;
 
+import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.jdbc.DatabaseDriver;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.jdbc.support.DatabaseStartupValidator;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.WebApplicationInitializer;
 
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.stream.Stream;
 
@@ -25,6 +26,7 @@ import java.util.stream.Stream;
                 "ru.vzotov.gpb"
         }
 )
+@EnableCaching
 @EnableScheduling
 @EnableAspectJAutoProxy
 public class Application extends SpringBootServletInitializer implements WebApplicationInitializer {
@@ -51,4 +53,5 @@ public class Application extends SpringBootServletInitializer implements WebAppl
         bean.setValidationQuery(DatabaseDriver.MYSQL.getValidationQuery());
         return bean;
     }
+
 }
