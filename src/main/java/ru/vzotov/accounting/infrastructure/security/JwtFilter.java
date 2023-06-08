@@ -1,19 +1,18 @@
 package ru.vzotov.accounting.infrastructure.security;
 
 import io.jsonwebtoken.Claims;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
-import org.springframework.util.StringUtils;
-import org.springframework.web.filter.GenericFilterBean;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
+import org.springframework.util.StringUtils;
+import org.springframework.web.filter.GenericFilterBean;
+
 import java.io.IOException;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -26,12 +25,10 @@ public class JwtFilter extends GenericFilterBean {
     private final JwtProvider jwtProvider;
 
     private final AuthenticationManager authenticationManager;
-    private final UserDetailsService userDetailsService;
 
-    public JwtFilter(JwtProvider jwtProvider, AuthenticationManager authenticationManager, UserDetailsService userDetailsService) {
+    public JwtFilter(JwtProvider jwtProvider, AuthenticationManager authenticationManager) {
         this.jwtProvider = jwtProvider;
         this.authenticationManager = authenticationManager;
-        this.userDetailsService = userDetailsService;
     }
 
     @Override

@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -33,7 +33,8 @@ public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
 
-    public SecurityConfig(JwtProvider jwtProvider, UserDetailsService userDetailsService) {
+    public SecurityConfig(JwtProvider jwtProvider,
+                          UserDetailsService userDetailsService) {
 
         this.jwtProvider = jwtProvider;
         this.userDetailsService = userDetailsService;
@@ -52,20 +53,14 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
                                 .anyRequest().authenticated()
                 )
-                .authenticationProvider(preAuthenticatedAuthenticationProvider())
                 .httpBasic(withDefaults())
                 .addFilterBefore(jwtFilter, BasicAuthenticationFilter.class)
                 .build();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
-
-    @Bean
     public JwtFilter jwtFilter(AuthenticationManager authenticationManager) {
-        return new JwtFilter(jwtProvider, authenticationManager, userDetailsService);
+        return new JwtFilter(jwtProvider, authenticationManager);
     }
 
     @Bean
@@ -76,6 +71,13 @@ public class SecurityConfig {
         DelegatingPasswordEncoder delegating = new DelegatingPasswordEncoder(prefix, Map.of(prefix, upgraded));
         delegating.setDefaultPasswordEncoderForMatches(current);
         return delegating;
+    }
+
+    @Bean
+    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+        AuthenticationManagerBuilder builder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        builder.authenticationProvider(preAuthenticatedAuthenticationProvider());
+        return builder.build();
     }
 
     public PreAuthenticatedAuthenticationProvider preAuthenticatedAuthenticationProvider() {
