@@ -8,6 +8,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
+import ru.vzotov.accounting.interfaces.accounting.AccountingApi;
 import ru.vzotov.banking.domain.model.BankId;
 
 import java.util.HashMap;
@@ -40,12 +41,12 @@ public class BanksControllerTest {
     private static final String API_PATH_GET_BANK = "/accounting/banks/{bankId}";
 
     /**
-     * @see BanksController#createBank(ru.vzotov.accounting.interfaces.accounting.rest.dto.BankCreateRequest)
+     * @see BanksController#createBank(AccountingApi.BankCreateRequest)
      */
     private static final String API_PATH_CREATE_BANK = "/accounting/banks";
 
     /**
-     * @see BanksController#modifyBank(java.lang.String, ru.vzotov.accounting.interfaces.accounting.rest.dto.BankCreateRequest)
+     * @see BanksController#modifyBank(java.lang.String, AccountingApi.BankCreateRequest)
      */
     private static final String API_PATH_MODIFY_BANK = "/accounting/banks/{bankId}";
 

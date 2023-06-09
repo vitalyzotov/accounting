@@ -8,7 +8,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
-import ru.vzotov.accounting.interfaces.accounting.rest.dto.AccountCreateRequest;
+import ru.vzotov.accounting.interfaces.accounting.AccountingApi;
 import ru.vzotov.banking.domain.model.BankId;
 import ru.vzotov.banking.domain.model.OperationType;
 
@@ -40,7 +40,7 @@ public class AccountsControllerTest {
     private static final String API_PATH_LIST_ACCOUNTS = "accounting/accounts";
 
     /**
-     * @see AccountsController#newAccount(AccountCreateRequest)
+     * @see AccountsController#newAccount(AccountingApi.AccountCreateRequest)
      */
     private static final String API_PATH_CREATE_ACCOUNT = "accounting/accounts";
 
@@ -60,12 +60,12 @@ public class AccountsControllerTest {
     private static final String API_PATH_LIST_ACCOUNT_OPERATIONS = "accounting/accounts/{number}/operations";
 
     /**
-     * @see AccountsController#createOperation(java.lang.String, ru.vzotov.accounting.interfaces.accounting.rest.dto.OperationCreateRequest)
+     * @see AccountsController#createOperation(java.lang.String, AccountingApi.OperationCreateRequest)
      */
     private static final String API_PATH_CREATE_ACCOUNT_OPERATION = "accounting/accounts/{number}/operations";
 
     /**
-     * @see AccountsController#modifyAccount(java.lang.String, ru.vzotov.accounting.interfaces.accounting.rest.dto.AccountModifyRequest)
+     * @see AccountsController#modifyAccount(java.lang.String, AccountingApi.AccountModifyRequest)
      */
     private static final String API_PATH_MODIFY_ACCOUNT = "accounting/accounts/{number}";
 
