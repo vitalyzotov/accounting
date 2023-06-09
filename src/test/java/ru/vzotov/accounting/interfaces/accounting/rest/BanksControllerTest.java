@@ -41,12 +41,12 @@ public class BanksControllerTest {
     private static final String API_PATH_GET_BANK = "/accounting/banks/{bankId}";
 
     /**
-     * @see BanksController#createBank(AccountingApi.BankCreateRequest)
+     * @see BanksController#createBank(AccountingApi.Bank.Create)
      */
     private static final String API_PATH_CREATE_BANK = "/accounting/banks";
 
     /**
-     * @see BanksController#modifyBank(java.lang.String, AccountingApi.BankCreateRequest)
+     * @see BanksController#modifyBank(java.lang.String, AccountingApi.Bank.Create)
      */
     private static final String API_PATH_MODIFY_BANK = "/accounting/banks/{bankId}";
 

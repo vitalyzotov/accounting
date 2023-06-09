@@ -40,7 +40,7 @@ public class AccountsControllerTest {
     private static final String API_PATH_LIST_ACCOUNTS = "accounting/accounts";
 
     /**
-     * @see AccountsController#newAccount(AccountingApi.AccountCreateRequest)
+     * @see AccountsController#newAccount(AccountingApi.Account.Create)
      */
     private static final String API_PATH_CREATE_ACCOUNT = "accounting/accounts";
 
@@ -60,12 +60,12 @@ public class AccountsControllerTest {
     private static final String API_PATH_LIST_ACCOUNT_OPERATIONS = "accounting/accounts/{number}/operations";
 
     /**
-     * @see AccountsController#createOperation(java.lang.String, AccountingApi.OperationCreateRequest)
+     * @see AccountsController#createOperation(java.lang.String, AccountingApi.AccountOperation.Create)
      */
     private static final String API_PATH_CREATE_ACCOUNT_OPERATION = "accounting/accounts/{number}/operations";
 
     /**
-     * @see AccountsController#modifyAccount(java.lang.String, AccountingApi.AccountModifyRequest)
+     * @see AccountsController#modifyAccount(java.lang.String, AccountingApi.Account.Modify)
      */
     private static final String API_PATH_MODIFY_ACCOUNT = "accounting/accounts/{number}";
 
