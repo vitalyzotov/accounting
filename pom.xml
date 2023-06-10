@@ -33,7 +33,7 @@
         <nalogru.password>password</nalogru.password>
 
         <!-- Own modules -->
-        <ddd.version>2.0</ddd.version>
+        <ddd.version>1.4</ddd.version>
         <gov.model.version>2.0</gov.model.version>
         <accounting.module.version>2.0</accounting.module.version>
 
