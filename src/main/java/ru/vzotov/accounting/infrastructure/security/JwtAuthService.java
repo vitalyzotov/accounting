@@ -7,7 +7,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
-import ru.vzotov.accounting.interfaces.accounting.rest.JwtResponse;
 
 @Service
 public class JwtAuthService {
@@ -58,4 +57,9 @@ public class JwtAuthService {
         throw new BadCredentialsException("Bad JWT refresh token");
     }
 
+    public static record JwtResponse(String type, String accessToken, String refreshToken) {
+        public JwtResponse(String accessToken, String refreshToken) {
+            this("Bearer", accessToken, refreshToken);
+        }
+    }
 }

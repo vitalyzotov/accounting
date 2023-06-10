@@ -22,82 +22,20 @@ public class SignupController {
 
     @PostMapping
     public UserRegistrationResponse registerNewUser(@RequestBody UserRegistrationRequest request) {
-        User user = userManagementFacade.registerNewUser(request.getName(), request.getPassword(),
-                request.getFirstName(), request.getLastName(), request.getDisplayName());
+        User user = userManagementFacade.registerNewUser(request.name(), request.password(),
+                request.firstName(), request.lastName(), request.displayName());
         return new UserRegistrationResponse(user.name());
     }
+
+    record UserRegistrationRequest(@Schema(description = "Name of the user") String name,
+                                   @Schema(description = "Password of the user as plaintext") String password,
+                                   @Schema(description = "First name") String firstName,
+                                   @Schema(description = "Last name") String lastName,
+                                   @Schema(description = "Display name") String displayName) {
+    }
+
+    record UserRegistrationResponse(@Schema(description = "Name of the registered user") String name) {
+    }
+
 }
 
-class UserRegistrationRequest {
-    @Schema(description = "Name of the user")
-    private String name;
-
-    @Schema(description = "Password of the user as plaintext")
-    private String password;
-
-    @Schema(description = "First name")
-    private String firstName;
-
-    @Schema(description = "Last name")
-    private String lastName;
-
-    @Schema(description = "Display name")
-    private String displayName;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-}
-
-class UserRegistrationResponse {
-    @Schema(description = "Name of the registered user")
-    private String name;
-
-    public UserRegistrationResponse(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-}
