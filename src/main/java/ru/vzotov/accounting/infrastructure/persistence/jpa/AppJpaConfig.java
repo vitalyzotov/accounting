@@ -1,5 +1,7 @@
 package ru.vzotov.accounting.infrastructure.persistence.jpa;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
@@ -10,11 +12,9 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import ru.vzotov.accounting.domain.model.PersonRepository;
 import ru.vzotov.accounting.domain.model.UserRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-@Configuration("jpa-accounting-app")
+@Configuration
 public class AppJpaConfig {
     private final DataSource dataSource;
 
@@ -49,4 +49,10 @@ public class AppJpaConfig {
         transactionManager.setEntityManagerFactory(emf);
         return transactionManager;
     }
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("accounting-app-emf") LocalContainerEntityManagerFactoryBean bean) {
+        return bean;
+    }
+
 }

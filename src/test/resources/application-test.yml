@@ -45,6 +45,11 @@ gazprombank:
       - "3852360"
       - "123456"
 
+jwt:
+  secret:
+    access: lDmCdE/uV37yGC3eSmrSFBtL2v5vHzRI74MavZAWSOcfUUWkdrj0D7HJdVlCc03ViLSjhhWb5qVUsxjSdAAa5A==
+    refresh: LNEFof3NqJNth62Cpvj5esqyekEhaX4TzyeaGKR8kp/noT5i4LCjlAyxX7kJ0Vfcd9ZlcS888ale2v6is+7ehw==
+
 accounting:
   security: production
   liquibase:

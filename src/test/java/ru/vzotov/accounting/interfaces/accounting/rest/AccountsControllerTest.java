@@ -1,16 +1,14 @@
 package ru.vzotov.accounting.interfaces.accounting.rest;
 
 import io.restassured.RestAssured;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
-import ru.vzotov.accounting.interfaces.accounting.rest.dto.AccountCreateRequest;
+import ru.vzotov.accounting.interfaces.accounting.AccountingApi;
 import ru.vzotov.banking.domain.model.BankId;
 import ru.vzotov.banking.domain.model.OperationType;
 
@@ -23,7 +21,6 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.yml")
 @ActiveProfiles("test")
@@ -43,7 +40,7 @@ public class AccountsControllerTest {
     private static final String API_PATH_LIST_ACCOUNTS = "accounting/accounts";
 
     /**
-     * @see AccountsController#newAccount(AccountCreateRequest)
+     * @see AccountsController#newAccount(AccountingApi.Account.Create)
      */
     private static final String API_PATH_CREATE_ACCOUNT = "accounting/accounts";
 
@@ -63,19 +60,19 @@ public class AccountsControllerTest {
     private static final String API_PATH_LIST_ACCOUNT_OPERATIONS = "accounting/accounts/{number}/operations";
 
     /**
-     * @see AccountsController#createOperation(java.lang.String, ru.vzotov.accounting.interfaces.accounting.rest.dto.OperationCreateRequest)
+     * @see AccountsController#createOperation(java.lang.String, AccountingApi.AccountOperation.Create)
      */
     private static final String API_PATH_CREATE_ACCOUNT_OPERATION = "accounting/accounts/{number}/operations";
 
     /**
-     * @see AccountsController#modifyAccount(java.lang.String, ru.vzotov.accounting.interfaces.accounting.rest.dto.AccountModifyRequest)
+     * @see AccountsController#modifyAccount(java.lang.String, AccountingApi.Account.Modify)
      */
     private static final String API_PATH_MODIFY_ACCOUNT = "accounting/accounts/{number}";
 
     @LocalServerPort
     int port;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         RestAssured.port = port;
     }

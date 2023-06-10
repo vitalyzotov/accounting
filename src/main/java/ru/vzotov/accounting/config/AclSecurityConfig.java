@@ -1,8 +1,6 @@
 package ru.vzotov.accounting.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.ehcache.EhCacheFactoryBean;
-import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
+import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
@@ -14,11 +12,12 @@ import org.springframework.security.acls.domain.AclAuthorizationStrategy;
 import org.springframework.security.acls.domain.AclAuthorizationStrategyImpl;
 import org.springframework.security.acls.domain.ConsoleAuditLogger;
 import org.springframework.security.acls.domain.DefaultPermissionGrantingStrategy;
-import org.springframework.security.acls.domain.EhCacheBasedAclCache;
 import org.springframework.security.acls.domain.ObjectIdentityImpl;
+import org.springframework.security.acls.domain.SpringCacheBasedAclCache;
 import org.springframework.security.acls.jdbc.BasicLookupStrategy;
 import org.springframework.security.acls.jdbc.JdbcMutableAclService;
 import org.springframework.security.acls.jdbc.LookupStrategy;
+import org.springframework.security.acls.model.AclCache;
 import org.springframework.security.acls.model.MutableAclService;
 import org.springframework.security.acls.model.PermissionGrantingStrategy;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -31,8 +30,14 @@ import java.util.UUID;
 @Configuration
 public class AclSecurityConfig {
 
-    @Autowired
-    DataSource dataSource;
+    final DataSource dataSource;
+
+    final org.springframework.cache.CacheManager springCacheManager;
+
+    public AclSecurityConfig(DataSource dataSource, CacheManager springCacheManager) {
+        this.dataSource = dataSource;
+        this.springCacheManager = springCacheManager;
+    }
 
     @Bean
     public MutableAclService aclService() {
@@ -52,25 +57,11 @@ public class AclSecurityConfig {
     }
 
     @Bean
-    public EhCacheBasedAclCache aclCache() {
-        return new EhCacheBasedAclCache(
-                aclEhCacheFactoryBean().getObject(),
+    public AclCache aclCache() {
+        org.springframework.cache.Cache cache = springCacheManager.getCache("acl_cache");
+        return new SpringCacheBasedAclCache(cache,
                 permissionGrantingStrategy(),
-                aclAuthorizationStrategy()
-        );
-    }
-
-    @Bean
-    public EhCacheFactoryBean aclEhCacheFactoryBean() {
-        EhCacheFactoryBean ehCacheFactoryBean = new EhCacheFactoryBean();
-        ehCacheFactoryBean.setCacheManager(aclCacheManager().getObject());
-        ehCacheFactoryBean.setCacheName("aclCache");
-        return ehCacheFactoryBean;
-    }
-
-    @Bean
-    public EhCacheManagerFactoryBean aclCacheManager() {
-        return new EhCacheManagerFactoryBean();
+                aclAuthorizationStrategy());
     }
 
     @Bean

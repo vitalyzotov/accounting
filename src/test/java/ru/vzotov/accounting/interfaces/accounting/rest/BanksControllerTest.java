@@ -1,15 +1,14 @@
 package ru.vzotov.accounting.interfaces.accounting.rest;
 
 import io.restassured.RestAssured;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
+import ru.vzotov.accounting.interfaces.accounting.AccountingApi;
 import ru.vzotov.banking.domain.model.BankId;
 
 import java.util.HashMap;
@@ -21,7 +20,6 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.yml")
 @ActiveProfiles("test")
@@ -43,12 +41,12 @@ public class BanksControllerTest {
     private static final String API_PATH_GET_BANK = "/accounting/banks/{bankId}";
 
     /**
-     * @see BanksController#createBank(ru.vzotov.accounting.interfaces.accounting.rest.dto.BankCreateRequest)
+     * @see BanksController#createBank(AccountingApi.Bank.Create)
      */
     private static final String API_PATH_CREATE_BANK = "/accounting/banks";
 
     /**
-     * @see BanksController#modifyBank(java.lang.String, ru.vzotov.accounting.interfaces.accounting.rest.dto.BankCreateRequest)
+     * @see BanksController#modifyBank(java.lang.String, AccountingApi.Bank.Modify)
      */
     private static final String API_PATH_MODIFY_BANK = "/accounting/banks/{bankId}";
 
@@ -56,7 +54,7 @@ public class BanksControllerTest {
     @LocalServerPort
     int port;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         RestAssured.port = port;
     }
