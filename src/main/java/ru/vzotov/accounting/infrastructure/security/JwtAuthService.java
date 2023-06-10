@@ -57,7 +57,7 @@ public class JwtAuthService {
         throw new BadCredentialsException("Bad JWT refresh token");
     }
 
-    public static record JwtResponse(String type, String accessToken, String refreshToken) {
+    public record JwtResponse(String type, String accessToken, String refreshToken) {
         public JwtResponse(String accessToken, String refreshToken) {
             this("Bearer", accessToken, refreshToken);
         }

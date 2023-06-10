@@ -29,9 +29,6 @@ public class SignupControllerTest {
         RestAssured.port = port;
     }
 
-//    @Autowired
-//    PasswordEncoder encoder;
-
     @Test
     public void whenValidSignup() {
         //System.out.println("Password = " + encoder.encode("1password*"));

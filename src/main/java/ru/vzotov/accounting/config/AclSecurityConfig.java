@@ -1,6 +1,6 @@
 package ru.vzotov.accounting.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
@@ -30,11 +30,14 @@ import java.util.UUID;
 @Configuration
 public class AclSecurityConfig {
 
-    @Autowired
-    DataSource dataSource;
+    final DataSource dataSource;
 
-    @Autowired
-    org.springframework.cache.CacheManager springCacheManager;
+    final org.springframework.cache.CacheManager springCacheManager;
+
+    public AclSecurityConfig(DataSource dataSource, CacheManager springCacheManager) {
+        this.dataSource = dataSource;
+        this.springCacheManager = springCacheManager;
+    }
 
     @Bean
     public MutableAclService aclService() {

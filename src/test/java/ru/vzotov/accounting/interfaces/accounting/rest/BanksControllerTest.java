@@ -46,7 +46,7 @@ public class BanksControllerTest {
     private static final String API_PATH_CREATE_BANK = "/accounting/banks";
 
     /**
-     * @see BanksController#modifyBank(java.lang.String, AccountingApi.Bank.Create)
+     * @see BanksController#modifyBank(java.lang.String, AccountingApi.Bank.Modify)
      */
     private static final String API_PATH_MODIFY_BANK = "/accounting/banks/{bankId}";
 

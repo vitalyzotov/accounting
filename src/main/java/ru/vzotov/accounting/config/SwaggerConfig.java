@@ -28,7 +28,7 @@ public class SwaggerConfig {
                         new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("basic")))
                 .info(new Info().title("Accounting API").version(appVersion).description(
                                 "Accounting API description")
-                        .termsOfService("http://swagger.io/terms/")
+                        .termsOfService("https://swagger.io/terms/")
                         .license(new License().name("Apache 2.0").url("https://www.apache.org/licenses/LICENSE-2.0")));
     }
 }

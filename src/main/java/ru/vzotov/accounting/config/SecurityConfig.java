@@ -44,6 +44,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(
             HttpSecurity http,
             JwtFilter jwtFilter) throws Exception {
+        //noinspection Convert2MethodRef
         return http
                 .sessionManagement(sessions -> sessions.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(csrf -> csrf.disable())
@@ -66,7 +67,7 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         String prefix = "scrypt@5.8";
-        PasswordEncoder current = SCryptPasswordEncoder.defaultsForSpringSecurity_v4_1();
+        @SuppressWarnings("deprecation") PasswordEncoder current = SCryptPasswordEncoder.defaultsForSpringSecurity_v4_1();
         PasswordEncoder upgraded = SCryptPasswordEncoder.defaultsForSpringSecurity_v5_8();
         DelegatingPasswordEncoder delegating = new DelegatingPasswordEncoder(prefix, Map.of(prefix, upgraded));
         delegating.setDefaultPasswordEncoderForMatches(current);
