@@ -30,8 +30,10 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://accounting-database/accounting?useSSL=false&allowPublicKeyRetrieval=true
       - SPRING_DATASOURCE_USERNAME=accounting
       - SPRING_DATASOURCE_PASSWORD=accounting
+      - NALOGRU_ADDRESS=http://localhost
       - NALOGRU_USERNAME=123456
       - NALOGRU_PASSWORD=654321
+      - NALOGRU2_ADDRESS=https://localhost:8888
       - NALOGRU2_DEVICEID=7C82010F-16CC-446B-8F66-FC4080C66521
       - NALOGRU2_CLIENTSECRET=IyvrAbKt9h/8p6a7QPh8gpkXYQ4=
       - NALOGRU2_USERNAME=123456
