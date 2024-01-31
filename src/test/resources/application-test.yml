@@ -18,6 +18,13 @@ spring:
     init:
       platform: h2
       mode: never
+  security:
+    oauth2:
+      client:
+        registration:
+          gigachat:
+           client-id: test
+           client-secret: test
 
 debug: true
 
@@ -51,6 +58,12 @@ jwt:
     refresh: LNEFof3NqJNth62Cpvj5esqyekEhaX4TzyeaGKR8kp/noT5i4LCjlAyxX7kJ0Vfcd9ZlcS888ale2v6is+7ehw==
 
 accounting:
+  ai:
+    purchases:
+      collection: AccountingPurchasesTest
+      index:
+        initial-delay: 36000000
+        delay: 36000000
   security: production
   liquibase:
     change-log: classpath:db.accounting-tests.xml

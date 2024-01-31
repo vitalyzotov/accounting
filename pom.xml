@@ -35,11 +35,12 @@
         <!-- Own modules -->
         <ddd.version>1.4</ddd.version>
         <gov.model.version>2.0</gov.model.version>
-        <accounting.module.version>2.2</accounting.module.version>
+        <accounting.module.version>2.3-SNAPSHOT</accounting.module.version>
 
         <alfabank.module.version>2.0</alfabank.module.version>
         <tinkoff.module.version>2.0</tinkoff.module.version>
         <gpb.module.version>2.0</gpb.module.version>
+        <ai.module.version>1.0-SNAPSHOT</ai.module.version>
     </properties>
 
     <dependencyManagement>
@@ -67,6 +68,12 @@
                 <groupId>ru.vzotov</groupId>
                 <artifactId>gpb-module</artifactId>
                 <version>${gpb.module.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ru.vzotov</groupId>
+                <artifactId>accounting-ai-module</artifactId>
+                <version>${ai.module.version}</version>
             </dependency>
 
             <dependency>
@@ -122,6 +129,11 @@
         <dependency>
             <groupId>ru.vzotov</groupId>
             <artifactId>gpb-module</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>ru.vzotov</groupId>
+            <artifactId>accounting-ai-module</artifactId>
         </dependency>
 
         <!--
@@ -351,16 +363,17 @@
         <plugins>
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <id>generate-directories</id>
                         <phase>initialize</phase>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <mkdir dir="target/data/alfabank_reports"/>
                                 <mkdir dir="target/data/tinkoff_reports"/>
                                 <mkdir dir="target/data/gpb_reports"/>
-                            </tasks>
+                            </target>
                         </configuration>
                         <goals>
                             <goal>run</goal>

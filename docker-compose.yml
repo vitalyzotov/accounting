@@ -28,7 +28,7 @@ services:
         aliases:
           - accounting-application
     environment:
-      - JAVA_OPTS=-Djava.net.preferIPv4Stack=true -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+      - JAVA_OPTS=-Djava.net.preferIPv4Stack=true -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
       - SPRING_DATASOURCE_URL=jdbc:mysql://accounting-database/accounting?useSSL=false&allowPublicKeyRetrieval=true
       - SPRING_DATASOURCE_USERNAME=accounting
       - SPRING_DATASOURCE_PASSWORD=accounting
@@ -42,6 +42,9 @@ services:
       - NALOGRU2_PASSWORD=654321
       - JWT_SECRET_ACCESS=Flm52xeGQadjcVULtUzUhURNBwqDMil4gpY8+GKc22BWD6htiXz5MlZOXbCyzaJkVormyEFlzWFuh9UcVnLLzQ==
       - JWT_SECRET_REFRESH=M2Y2OTkzZTQ1NjE5MzcwZGIzNThhMThkY2UyNTY4MzIwM2VjZGY0MDk0N2EzMTI1NWU4NjQwYWM5ZGNhYTAwZQ==
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GIGACHAT_CLIENT_ID=${SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GIGACHAT_CLIENT_ID}
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GIGACHAT_CLIENT_SECRET=${SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GIGACHAT_CLIENT_SECRET}
+      - LOGGING_LEVEL_RU_VZOTOV_AI=DEBUG
     volumes:
       - ./alfabank_reports:/alfabank_reports
       - ./tinkoff_reports:/tinkoff_reports
@@ -68,6 +71,6 @@ services:
       - MYSQL_DATABASE=accounting
     volumes:
       - ./mysql:/var/lib/mysql
-      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
+      - ./dump.sql:/docker-entrypoint-initdb.d
 networks:
   accounting-network:

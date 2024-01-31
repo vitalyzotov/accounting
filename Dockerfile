@@ -6,6 +6,13 @@ COPY ${DEPENDENCY}/META-INF /app/META-INF
 COPY ${DEPENDENCY}/BOOT-INF/classes /app
 ENV JAVA_OPTS=""
 EXPOSE 8080
+
+COPY /russian_trusted/*.crt /russian_trusted/
+RUN $JAVA_HOME/bin/keytool -import -storepass changeit -noprompt -alias RUS_ROOT_CA -cacerts -trustcacerts \
+    -file /russian_trusted/russian_trusted_root_ca_pem.crt \
+    && $JAVA_HOME/bin/keytool -import -storepass changeit -noprompt -alias RUS_SUB_CA -cacerts -trustcacerts \
+    -file /russian_trusted/russian_trusted_root_ca_pem.crt
+
 ENTRYPOINT java ${JAVA_OPTS} -XshowSettings:vm -XX:MaxRAMFraction=1 -XX:MaxRAMPercentage=80.0 -XX:+PrintFlagsFinal -cp "app:app/lib/*" ru.vzotov.accounting.Application
 
 ARG ALFABANK_REPORTS=/alfabank_reports
@@ -19,3 +26,4 @@ VOLUME ${TINKOFF_REPORTS}
 ARG GPB_REPORTS=/gpb_reports
 RUN mkdir ${GPB_REPORTS}
 VOLUME ${GPB_REPORTS}
+

@@ -24,6 +24,18 @@ spring:
     jcache:
       provider: org.ehcache.jsr107.EhcacheCachingProvider
     cache-names: acl_cache
+  security:
+    oauth2:
+      client:
+        registration:
+          gigachat:
+            # client-id: <set client id via environment variable>
+            # client-secret: <set client secret via environment variable>
+            authorization-grant-type: client_credentials
+            scope: GIGACHAT_API_PERS
+        provider:
+          gigachat:
+            token-uri: https://ngw.devices.sberbank.ru:9443/api/v2/oauth
 
 server:
   servlet:
@@ -44,6 +56,15 @@ cashreceipts:
     change-log: classpath:db/cashreceipt/changelog/db.changelog-master.xml
 
 accounting:
+  ai:
+    purchases:
+      collection: AccountingPurchases
+      index:
+        initial-delay: 3000
+        delay: 3600000
+    milvus:
+      host: 10.5.5.80
+      port: 32530
   liquibase:
     enabled: true
     change-log: classpath:db/accounting/changelog/db.changelog-master.xml

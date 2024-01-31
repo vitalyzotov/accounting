@@ -37,3 +37,5 @@ gpb_reports/
 /dump.sql
 /nginx/certs/**
 /nginx/dhparam/**
+
+.env

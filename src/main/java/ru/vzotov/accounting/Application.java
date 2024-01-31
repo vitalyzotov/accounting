@@ -22,7 +22,8 @@ import java.util.stream.Stream;
                 "ru.vzotov.accounting",
                 "ru.vzotov.alfabank",
                 "ru.vzotov.tinkoff",
-                "ru.vzotov.gpb"
+                "ru.vzotov.gpb",
+                "ru.vzotov.ai"
         }
 )
 @EnableCaching
