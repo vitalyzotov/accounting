@@ -57,6 +57,8 @@ cashreceipts:
 
 accounting:
   ai:
+    gigachat:
+      model: GigaChat-Pro
     purchases:
       collection: AccountingPurchases
       index:
