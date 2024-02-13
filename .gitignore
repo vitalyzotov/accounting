@@ -27,6 +27,7 @@ mysql/
 alfabank_reports/
 tinkoff_reports/
 gpb_reports/
+pgdata/
 
 # IntelliJ project files
 .idea/
@@ -39,3 +40,4 @@ gpb_reports/
 /nginx/dhparam/**
 
 .env
+russian_trusted/

@@ -24,18 +24,6 @@ spring:
     jcache:
       provider: org.ehcache.jsr107.EhcacheCachingProvider
     cache-names: acl_cache
-  security:
-    oauth2:
-      client:
-        registration:
-          gigachat:
-            # client-id: <set client id via environment variable>
-            # client-secret: <set client secret via environment variable>
-            authorization-grant-type: client_credentials
-            scope: GIGACHAT_API_PERS
-        provider:
-          gigachat:
-            token-uri: https://ngw.devices.sberbank.ru:9443/api/v2/oauth
 
 server:
   servlet:
@@ -55,18 +43,36 @@ cashreceipts:
     enabled: true
     change-log: classpath:db/cashreceipt/changelog/db.changelog-master.xml
 
+langchain4j:
+  gigachat:
+    chat-model:
+      # Set from environment variables
+      # client-id:
+      # client-secret:
+      # scope:
+      model-name: GigaChat
+      log-requests: true
+      log-responses: true
+    embedding-model:
+      # client-id:
+      # client-secret:
+      # scope:
+      model-name: Embeddings
+      log-requests: true
+      log-responses: true
+
 accounting:
   ai:
-    gigachat:
-      model: GigaChat-Pro
+    enabled: true
     purchases:
-      collection: AccountingPurchases
       index:
         initial-delay: 3000
         delay: 3600000
     milvus:
       host: 10.5.5.80
       port: 32530
+      dimension: 1024
+      collection-name: AccountingPurchases
   liquibase:
     enabled: true
     change-log: classpath:db/accounting/changelog/db.changelog-master.xml
@@ -76,7 +82,6 @@ application:
   liquibase:
     enabled: true
     change-log: classpath:db/application/changelog/db.changelog-master.xml
-
 
 alfabank:
   reports:
@@ -98,7 +103,7 @@ jwt:
     access: NjI5ZmFiOGIzODM1YzNjOGQzY2M1Nzg2YTQ1MDIwNDY3ZDQzZTM5ODA1ZjBlZWQ0MmExYWE1YzBkMWZlNWM2Yg==
     refresh: M2Y2OTkzZTQ1NjE5MzcwZGIzNThhMThkY2UyNTY4MzIwM2VjZGY0MDk0N2EzMTI1NWU4NjQwYWM5ZGNhYTAwZQ==
 
-debug: false
+debug: true
 
 logging:
   level:

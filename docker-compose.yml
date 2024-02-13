@@ -42,9 +42,16 @@ services:
       - NALOGRU2_PASSWORD=654321
       - JWT_SECRET_ACCESS=Flm52xeGQadjcVULtUzUhURNBwqDMil4gpY8+GKc22BWD6htiXz5MlZOXbCyzaJkVormyEFlzWFuh9UcVnLLzQ==
       - JWT_SECRET_REFRESH=M2Y2OTkzZTQ1NjE5MzcwZGIzNThhMThkY2UyNTY4MzIwM2VjZGY0MDk0N2EzMTI1NWU4NjQwYWM5ZGNhYTAwZQ==
-      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GIGACHAT_CLIENT_ID=${SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GIGACHAT_CLIENT_ID}
-      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GIGACHAT_CLIENT_SECRET=${SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GIGACHAT_CLIENT_SECRET}
+      - LANGCHAIN4J_GIGACHAT_CHAT_MODEL_CLIENT_ID=${GIGACHAT_CLIENT_ID}
+      - LANGCHAIN4J_GIGACHAT_CHAT_MODEL_CLIENT_SECRET=${GIGACHAT_CLIENT_SECRET}
+      - LANGCHAIN4J_GIGACHAT_CHAT_MODEL_SCOPE=${GIGACHAT_CLIENT_SCOPE}
+      - LANGCHAIN4J_GIGACHAT_EMBEDDING_MODEL_CLIENT_ID=${GIGACHAT_CLIENT_ID}
+      - LANGCHAIN4J_GIGACHAT_EMBEDDING_MODEL_CLIENT_SECRET=${GIGACHAT_CLIENT_SECRET}
+      - LANGCHAIN4J_GIGACHAT_EMBEDDING_MODEL_SCOPE=${GIGACHAT_CLIENT_SCOPE}
+      - ACCOUNTING_AI_ENABLED=false
+      - ACCOUNTING_AI_MILVUS_COLLECTION_NAME=AccPurchasesDev
       - LOGGING_LEVEL_RU_VZOTOV_AI=DEBUG
+      - LOGGING_LEVEL_RU_VZOTOV_LANGCHAIN4J_GIGACHAT=DEBUG
     volumes:
       - ./alfabank_reports:/alfabank_reports
       - ./tinkoff_reports:/tinkoff_reports
@@ -55,6 +62,22 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  accounting-postgres:
+    container_name: accounting-postgres
+    image: docker.vzotov.ru/vzotov/accounting-postgres:dev
+    build: ./db_postgres
+    ports:
+      - 5432:5432
+    networks:
+      accounting-network:
+        aliases:
+          - accounting-postgres
+    environment:
+      POSTGRES_USER: accounting
+      POSTGRES_PASSWORD: accounting
+      POSTGRES_DB: accounting
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
   accounting-database:
     image: mysql:8.0.27
     command: --lower-case-table-names=1 --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci

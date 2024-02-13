@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:17-jdk-jammy
 VOLUME /tmp
 ARG DEPENDENCY=target/dependency
 COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
@@ -8,10 +8,10 @@ ENV JAVA_OPTS=""
 EXPOSE 8080
 
 COPY /russian_trusted/*.crt /russian_trusted/
-RUN $JAVA_HOME/bin/keytool -import -storepass changeit -noprompt -alias RUS_ROOT_CA -cacerts -trustcacerts \
-    -file /russian_trusted/russian_trusted_root_ca_pem.crt \
-    && $JAVA_HOME/bin/keytool -import -storepass changeit -noprompt -alias RUS_SUB_CA -cacerts -trustcacerts \
-    -file /russian_trusted/russian_trusted_root_ca_pem.crt
+RUN $JAVA_HOME/bin/keytool -importcert -storepass changeit -noprompt -alias RUS_ROOT_CA -cacerts -trustcacerts \
+ -file /russian_trusted/russian_trusted_root_ca_pem.crt \
+ && $JAVA_HOME/bin/keytool -importcert -storepass changeit -noprompt -alias RUS_SUB_CA -cacerts -trustcacerts \
+ -file /russian_trusted/russian_trusted_root_ca_pem.crt
 
 ENTRYPOINT java ${JAVA_OPTS} -XshowSettings:vm -XX:MaxRAMFraction=1 -XX:MaxRAMPercentage=80.0 -XX:+PrintFlagsFinal -cp "app:app/lib/*" ru.vzotov.accounting.Application
 
