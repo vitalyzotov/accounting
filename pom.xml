@@ -35,12 +35,12 @@
         <!-- Own modules -->
         <ddd.version>1.4</ddd.version>
         <gov.model.version>2.0</gov.model.version>
-        <accounting.module.version>2.3-SNAPSHOT</accounting.module.version>
+        <accounting.module.version>2.3</accounting.module.version>
 
         <alfabank.module.version>2.0</alfabank.module.version>
         <tinkoff.module.version>2.0</tinkoff.module.version>
         <gpb.module.version>2.0</gpb.module.version>
-        <ai.module.version>1.0-SNAPSHOT</ai.module.version>
+        <ai.module.version>1.0</ai.module.version>
     </properties>
 
     <dependencyManagement>
