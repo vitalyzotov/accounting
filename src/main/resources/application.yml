@@ -68,6 +68,7 @@ accounting:
       index:
         initial-delay: 3000
         delay: 3600000
+      partition-size: 1000
     milvus:
       host: 10.5.5.80
       port: 32530
