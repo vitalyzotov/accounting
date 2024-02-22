@@ -16,7 +16,8 @@ services:
         aliases:
           - accounting-gate
   accounting-application:
-    build: .
+    build: 
+      context: .
     image: docker.vzotov.ru/vzotov/accounting-application:dev
     ports:
       - 8080:8080
@@ -58,6 +59,7 @@ services:
       - ./alfabank_reports:/alfabank_reports
       - ./tinkoff_reports:/tinkoff_reports
       - ./gpb_reports:/gpb_reports
+      - ./russian_trusted:/cacerts
     healthcheck:
       test: [ "CMD-SHELL", "wget --spider -S http://localhost:8080/actuator/health 2>&1 | grep 'HTTP/1.1 401'" ]
       start_period: 15s
