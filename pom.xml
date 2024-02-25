@@ -40,7 +40,7 @@
         <alfabank.module.version>2.0</alfabank.module.version>
         <tinkoff.module.version>2.0</tinkoff.module.version>
         <gpb.module.version>2.0</gpb.module.version>
-        <ai.module.version>1.2</ai.module.version>
+        <ai.module.version>1.3</ai.module.version>
     </properties>
 
     <dependencyManagement>

@@ -65,15 +65,7 @@ accounting:
   ai:
     enabled: true
     purchases:
-      index:
-        initial-delay: 3000
-        delay: 3600000
       partition-size: 1000
-    milvus:
-      host: 10.5.5.80
-      port: 32530
-      dimension: 1024
-      collection-name: AccountingPurchases
   liquibase:
     enabled: true
     change-log: classpath:db/accounting/changelog/db.changelog-master.xml
